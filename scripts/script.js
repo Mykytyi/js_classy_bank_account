@@ -5,25 +5,38 @@ class Person {
     this.name = name;
     this.birthday = date;
     this.money = money;
-    this.accountHistory = [`Initial: ${money}$`];
+    this.accountHistory = [];
+    this.accountHistory.push({
+      name: 'Initial',
+      amountOfMoney: money
+    });
   }
 
   getInfo() {
     const dateArr = this.birthday.split('.');
     const date = new Date(dateArr[2], dateArr[1], dateArr[0]);
     const age = getAge(date)//now.getFullYear() - birthYear;
-    console.log(`Name: ${this.name}, Age: ${age}, Amount: ${this.money}$`);
   }
   addMoney(amountOfMoney, source) {
-    this.accountHistory.push(`${source}: ${amountOfMoney}$`);
+    this.accountHistory.push({
+      name: source,
+      amountOfMoney: amountOfMoney
+    });
     this.money += amountOfMoney;
   }
   withdrawMoney(amountOfMoney, aim) {
-    this.accountHistory.push(`${aim}: -${amountOfMoney}$`);
+    this.accountHistory.push({
+      name: aim,
+      amountOfMoney: -amountOfMoney
+    });
     this.money -= amountOfMoney;
   }
   getAccountHistory() {
-    console.log(this.accountHistory);
+    const arrForInput = [];
+    for (let item of this.accountHistory) {
+      arrForInput.push(`${item.name}: ${item.amountOfMoney}$`);
+    }
+    return arrForInput;
   }
 }
 
