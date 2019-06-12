@@ -15,7 +15,8 @@ class Person {
   getInfo() {
     const dateArr = this.birthday.split('.');
     const date = new Date(dateArr[2], dateArr[1], dateArr[0]);
-    const age = getAge(date)//now.getFullYear() - birthYear;
+    const age = this.getAge(date); //now.getFullYear() - birthYear;
+    return `Name: ${this.name}, Age: ${age}, Amount: ${this.money}$`;
   }
   addMoney(amountOfMoney, source) {
     this.accountHistory.push({
@@ -38,6 +39,19 @@ class Person {
     }
     return arrForInput;
   }
+
+  getAge(dateString)
+  {
+    let today = new Date();
+    let birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let month = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate()))
+    {
+      age--;
+    }
+    return age;
+  }
 }
 
 const dmytro = new Person('Dmytro', '26.11.1994', 1000);
@@ -51,17 +65,3 @@ dmytro.withdrawMoney(500, 'apartment rent');
 dmytro.getAccountHistory(); // [ 'Initial: 1000', 'salary: 2000', 'new phone: -500', 'apartment rent: -500']
 
 pavel.getInfo(); // // Name: Pavel, Age: 28, Amount: 400$
-
-
-function getAge(dateString)
-{
-  var today = new Date();
-  var birthDate = new Date(dateString);
-  var age = today.getFullYear() - birthDate.getFullYear();
-  var m = today.getMonth() - birthDate.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
-  {
-    age--;
-  }
-  return age;
-}
