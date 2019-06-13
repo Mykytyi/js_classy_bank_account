@@ -14,7 +14,6 @@ class Person {
   }
 
   getInfo() {
-    console.log(`Name: ${this.name}, Age: ${this.age}, Amount: ${this.money}$`);
     return `Name: ${this.name}, Age: ${this.age}, Amount: ${this.money}$`;
   }
   addMoney(amountOfMoney, source) {
