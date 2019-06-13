@@ -41,9 +41,8 @@ class Person {
   getAge()
   {
     const dateArr = this.birthday;
-    const date = new Date(dateArr[2], dateArr[1], dateArr[0]);
     const today = new Date();
-    const birthDate = new Date(date);
+    const birthDate = new Date(dateArr[2], dateArr[1], dateArr[0]);
     let age = today.getFullYear() - birthDate.getFullYear();
     const month = today.getMonth() - birthDate.getMonth();
     if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate()))
