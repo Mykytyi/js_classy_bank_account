@@ -42,7 +42,7 @@ class Person {
 
   getAge(dateString)
   {
-    let today = new Date();
+    const today = new Date();
     let birthDate = new Date(dateString);
     let age = today.getFullYear() - birthDate.getFullYear();
     let month = today.getMonth() - birthDate.getMonth();
