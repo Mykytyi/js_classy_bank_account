@@ -3,7 +3,8 @@
 class Person {
   constructor(name, date, money) {
     this.name = name;
-    this.birthday = date;
+    this.birthday = date.split('.');
+    this.age = this.getAge();
     this.money = money;
     this.accountHistory = [];
     this.accountHistory.push({
@@ -13,10 +14,8 @@ class Person {
   }
 
   getInfo() {
-    const dateArr = this.birthday.split('.');
-    const date = new Date(dateArr[2], dateArr[1], dateArr[0]);
-    const age = this.getAge(date); //now.getFullYear() - birthYear;
-    return `Name: ${this.name}, Age: ${age}, Amount: ${this.money}$`;
+    console.log(`Name: ${this.name}, Age: ${this.age}, Amount: ${this.money}$`);
+    return `Name: ${this.name}, Age: ${this.age}, Amount: ${this.money}$`;
   }
   addMoney(amountOfMoney, source) {
     this.accountHistory.push({
@@ -40,12 +39,14 @@ class Person {
     return arrForInput;
   }
 
-  getAge(dateString)
+  getAge()
   {
-    let today = new Date();
-    let birthDate = new Date(dateString);
+    const dateArr = this.birthday;
+    const date = new Date(dateArr[2], dateArr[1], dateArr[0]);
+    const today = new Date();
+    const birthDate = new Date(date);
     let age = today.getFullYear() - birthDate.getFullYear();
-    let month = today.getMonth() - birthDate.getMonth();
+    const month = today.getMonth() - birthDate.getMonth();
     if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate()))
     {
       age--;
